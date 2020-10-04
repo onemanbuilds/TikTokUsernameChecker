@@ -123,3 +123,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+output/TikTokUsernameChecker.exe
+output/TikTokUsernameChecker_v1.zip
+output/usernames.txt
+output/tool.PNG
+output/example.PNG
+output/bad_usernames.txt
+output/available_usernames.txt
+output/proxies.txt
