@@ -1,5 +1,5 @@
 # TikTok Username Checker
-  Returns availability of TikTok username from a list.
+  Returns availability of TikTok usernames from a list.
 
 # Tool
 ![](https://i.ibb.co/fYJJvCM/tool.png)
