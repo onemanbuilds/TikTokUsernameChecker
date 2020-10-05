@@ -45,7 +45,7 @@ class Main:
         self.usernames = self.ReadFile('usernames.txt','r')
 
     def GetRandomProxy(self):
-        proxies_file = ReadFile('proxies.txt','r')
+        proxies_file = self.ReadFile('proxies.txt','r')
         proxies = {
             "http":"http://{0}".format(random.choice(proxies_file)),
             "https":"https://{0}".format(random.choice(proxies_file))
