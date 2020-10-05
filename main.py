@@ -53,26 +53,28 @@ class Main:
         return proxies
 
     def CheckUsernames(self,usernames):
+        try:
+            headers = {
+                'User-Agent':self.ua.random
+            }
 
-        headers = {
-            'User-Agent':self.ua.random
-        }
+            response = ''
 
-        response = ''
+            if self.use_proxy == 1:
+                response = requests.get("https://www.tiktok.com/@{0}".format(usernames),headers=headers,proxies=self.GetRandomProxy()).text
+            else:
+                response = requests.get("https://www.tiktok.com/@{0}".format(usernames),headers=headers).text
 
-        if self.use_proxy == 1:
-            response = requests.get("https://www.tiktok.com/@{0}".format(usernames),headers=headers,proxies=self.GetRandomProxy()).text
-        else:
-            response = requests.get("https://www.tiktok.com/@{0}".format(usernames),headers=headers).text
-
-        if 'jsx-4111167561 title' in response:
-            self.PrintText('AVAILABLE',usernames,Fore.GREEN,Fore.WHITE)
-            with open('available_usernames.txt','a') as f:
-                f.write(usernames+"\n")
-        else:
-            self.PrintText('NOT AVAILABLE',usernames,Fore.RED,Fore.WHITE)
-            with open('bad_usernames.txt','a') as f:
-                f.write(usernames+"\n")
+            if 'jsx-4111167561 title' in response:
+                self.PrintText('AVAILABLE',usernames,Fore.GREEN,Fore.WHITE)
+                with open('available_usernames.txt','a') as f:
+                    f.write(usernames+"\n")
+            else:
+                self.PrintText('NOT AVAILABLE',usernames,Fore.RED,Fore.WHITE)
+                with open('bad_usernames.txt','a') as f:
+                    f.write(usernames+"\n")
+        except:
+            pass
 
     def StartCheck(self):
         pool = ThreadPool()
