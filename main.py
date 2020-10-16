@@ -74,7 +74,7 @@ class Main:
                 with open('bad_usernames.txt','a') as f:
                     f.write(usernames+"\n")
         except:
-            pass
+            self.CheckUsernames(usernames)
 
     def StartCheck(self):
         pool = ThreadPool()
