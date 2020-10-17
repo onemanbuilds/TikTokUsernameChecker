@@ -4,6 +4,7 @@ import json
 import time
 import random
 import sys
+import string
 from colorama import init,Fore
 from datetime import datetime
 from multiprocessing.dummy import Pool as ThreadPool
@@ -40,7 +41,9 @@ class Main:
         self.clear()
         init()
         self.ua = UserAgent()
-        self.use_proxy = int(input('[QUESTION] Would you like to use proxies [1] yes [0] no: '))
+        
+        self.option = int(input('[QUESTION] Would you like to [1]Generate Usernames [0]Check Usernames: '))
+
         print('')
         self.usernames = self.ReadFile('usernames.txt','r')
 
@@ -51,6 +54,14 @@ class Main:
             "https":"https://{0}".format(random.choice(proxies_file))
             }
         return proxies
+
+    def GenUsername(self,amount,length):
+        for i in range(amount):
+            name = ''.join(random.choice(string.ascii_letters+'0123456789') for num in range(length))
+            count = i+1
+            self.PrintText(str(count),name,Fore.GREEN,Fore.WHITE)
+            with open('usernames.txt','a',encoding='utf8') as f:
+                f.write(name+'\n')
 
     def CheckUsernames(self,usernames):
         try:
@@ -76,14 +87,20 @@ class Main:
         except:
             self.CheckUsernames(usernames)
 
-    def StartCheck(self):
-        pool = ThreadPool()
-        results = pool.map(self.CheckUsernames,self.usernames)
-        pool.close()
-        pool.join()
+    def Start(self):
+        if self.option == 1:
+            self.amount = int(input('[QUESTION] Enter the amount: '))
+            self.length = int(input('[QUESTION] Enter the length: '))
+            self.GenUsername(self.amount,self.length)
+        else:
+            self.use_proxy = int(input('[QUESTION] Would you like to use proxies [1] yes [0] no: '))
+            pool = ThreadPool()
+            results = pool.map(self.CheckUsernames,self.usernames)
+            pool.close()
+            pool.join()
 
 
 if __name__ == "__main__":
     main = Main()
-    main.StartCheck()
+    main.Start()
     
