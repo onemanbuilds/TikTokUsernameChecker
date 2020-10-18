@@ -28,21 +28,26 @@ class Main:
             content = [line.strip('\n') for line in f]
             return content
 
-    def PrintText(self,info_name,text,info_color:Fore,text_color:Fore):
-        lock = Lock()
-        lock.acquire()
-        sys.stdout.flush()
-        text = text.encode('ascii','replace').decode()
-        sys.stdout.write(f'[{info_color+info_name+Fore.RESET}] '+text_color+f'{text}\n')
-        lock.release()
-
     def __init__(self):
         self.SetTitle('One Man Builds TikTok Username Checker Tool')
         self.clear()
-        init()
+        init(convert=True)
+        title = Fore.YELLOW+"""
+                        
+               ___ _ _  _ ___ ____ _  _    _  _ ____ ____ ____ _  _ ____ _  _ ____ 
+                |  | |_/   |  |  | |_/     |  | [__  |___ |__/ |\ | |__| |\/| |___ 
+                |  | | \_  |  |__| | \_    |__| ___] |___ |  \ | \| |  | |  | |___ 
+                                                                                    
+                                ____ _  _ ____ ____ _  _ ____ ____                                  
+                                |    |__| |___ |    |_/  |___ |__/                                  
+                                |___ |  | |___ |___ | \_ |___ |  \                                  
+                                                                                                    
+                        
+        """
+        print(title)
         self.ua = UserAgent()
         
-        self.option = int(input('[QUESTION] Would you like to [1]Generate Usernames [0]Check Usernames: '))
+        self.option = int(input(Fore.YELLOW+'['+Fore.WHITE+'>'+Fore.YELLOW+'] Would you like to [1]Generate Usernames [0]Check Usernames: '))
 
         print('')
         self.usernames = self.ReadFile('usernames.txt','r')
@@ -55,13 +60,17 @@ class Main:
             }
         return proxies
 
-    def GenUsername(self,amount,length):
+    def UsernameGenRandomChars(self,amount,length,include_digits,prefix,suffix):
+        counter = 0
         for i in range(amount):
-            name = ''.join(random.choice(string.ascii_letters+'0123456789') for num in range(length))
-            count = i+1
-            self.PrintText(str(count),name,Fore.GREEN,Fore.WHITE)
+            counter = i+1
+            if include_digits == 1:
+                username = prefix+''.join(random.choice(string.ascii_letters+'0123456789') for num in range(length))+suffix
+            else:
+                username = prefix+''.join(random.choice(string.ascii_letters) for num in range(length))+suffix
+            print(Fore.GREEN+'['+Fore.WHITE+f'{counter}'+Fore.GREEN+f'] {username}')
             with open('usernames.txt','a',encoding='utf8') as f:
-                f.write(name+'\n')
+                f.write(username+'\n')
 
     def CheckUsernames(self,usernames):
         try:
@@ -77,11 +86,12 @@ class Main:
                 response = requests.get("https://www.tiktok.com/@{0}".format(usernames),headers=headers).text
 
             if 'jsx-4111167561 title' in response:
+                print(Fore.GREEN+'['+Fore.WHITE+'!'+Fore.GREEN+'] AVAILABLE | {0}'.format(usernames))
                 self.PrintText('AVAILABLE',usernames,Fore.GREEN,Fore.WHITE)
                 with open('available_usernames.txt','a') as f:
                     f.write(usernames+"\n")
             else:
-                self.PrintText('NOT AVAILABLE',usernames,Fore.RED,Fore.WHITE)
+                print(Fore.RED+'['+Fore.WHITE+'!'+Fore.RED+'] NOT AVAILABLE | {0}'.format(usernames))
                 with open('bad_usernames.txt','a') as f:
                     f.write(usernames+"\n")
         except:
@@ -89,16 +99,18 @@ class Main:
 
     def Start(self):
         if self.option == 1:
-            self.amount = int(input('[QUESTION] Enter the amount: '))
-            self.length = int(input('[QUESTION] Enter the length: '))
-            self.GenUsername(self.amount,self.length)
+            amount = int(input(Fore.YELLOW+'['+Fore.WHITE+'>'+Fore.YELLOW+'] Enter the amount: '))
+            length = int(input(Fore.YELLOW+'['+Fore.WHITE+'>'+Fore.YELLOW+'] Enter the length: '))
+            include_digits = int(input(Fore.YELLOW+'['+Fore.WHITE+'>'+Fore.YELLOW+'] Include digits [1]yes [2]no: '))
+            prefix = str(input(Fore.YELLOW+'['+Fore.WHITE+'>'+Fore.YELLOW+'] Prefix (leave it empty if you dont want to use it): '))
+            suffix = str(input(Fore.YELLOW+'['+Fore.WHITE+'>'+Fore.YELLOW+'] Suffix (leave it empty if you dont want to use it): '))
+            self.UsernameGenRandomChars(amount,length,include_digits,prefix,suffix)
         else:
-            self.use_proxy = int(input('[QUESTION] Would you like to use proxies [1] yes [0] no: '))
+            self.use_proxy = int(input(Fore.YELLOW+'['+Fore.WHITE+'>'+Fore.YELLOW+'] Would you like to use proxies [1] yes [0] no: '))
             pool = ThreadPool()
             results = pool.map(self.CheckUsernames,self.usernames)
             pool.close()
             pool.join()
-
 
 if __name__ == "__main__":
     main = Main()
