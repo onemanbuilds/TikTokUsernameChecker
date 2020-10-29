@@ -1,11 +1,11 @@
-# TikTok Username Checker
+# TikTok Username Checker & Generator
   Returns availability of TikTok usernames from a list.
 
 # Tool
-![](https://i.ibb.co/fYJJvCM/tool.png)
+![](https://i.ibb.co/JQ60v5m/tiktok-username-checker-tool.png)
 
 # Example
-![](https://i.ibb.co/QYn6M4N/example.png)
+![](https://i.ibb.co/89sDXmD/tiktok-username-checker-example.png)
 
 # Legal
  This was merely a speedrun to demonstrate how username checkers work.<br/>
