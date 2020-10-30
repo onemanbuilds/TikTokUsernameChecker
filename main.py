@@ -36,9 +36,21 @@ class Main:
 
     def GetRandomProxy(self):
         proxies_file = self.ReadFile('proxies.txt','r')
-        proxies = {
-            "http":"http://{0}".format(choice(proxies_file)),
-            "https":"https://{0}".format(choice(proxies_file))
+        proxies = {}
+        if self.proxy_type == 1:
+            proxies = {
+                "http":"http://{0}".format(choice(proxies_file)),
+                "https":"https://{0}".format(choice(proxies_file))
+            }
+        elif self.proxy_type == 2:
+            proxies = {
+                "http":"socks4://{0}".format(choice(proxies_file)),
+                "https":"socks4://{0}".format(choice(proxies_file))
+            }
+        else:
+            proxies = {
+                "http":"socks5://{0}".format(choice(proxies_file)),
+                "https":"socks5://{0}".format(choice(proxies_file))
             }
         return proxies
 
@@ -72,6 +84,10 @@ class Main:
         self.ua = UserAgent()
         self.lock = Lock()
         self.use_proxy = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] ['+Fore.RED+'1'+Fore.CYAN+']Proxy ['+Fore.RED+'0'+Fore.CYAN+']Proxyless: '))
+        
+        if self.use_proxy == 1:
+            self.proxy_type = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] ['+Fore.RED+'1'+Fore.CYAN+']Https ['+Fore.RED+'2'+Fore.CYAN+']Socks4 ['+Fore.RED+'3'+Fore.CYAN+']Socks5: '))
+        
         self.method = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] ['+Fore.RED+'1'+Fore.CYAN+']Brute ['+Fore.RED+'0'+Fore.CYAN+']From Usernames.txt: '))
         self.enable_webhook = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] ['+Fore.RED+'1'+Fore.CYAN+']Enable Webhook ['+Fore.RED+'0'+Fore.CYAN+']No Webhook: '))
         self.threads_num = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] Threads: '))
