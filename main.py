@@ -20,7 +20,48 @@ class Main:
             print("\n") * 120
 
     def SetTitle(self,title_name:str):
-        system("title {0}".format(title_name))
+        if name in ('ce', 'nt', 'dos'):
+            system("title {0}".format(title_name))
+        else:
+            stdout.write("\x1b]2;{0}\x07".format(title_name))
+
+    def __init__(self):
+        init(convert=True)
+        self.clear()
+        self.SetTitle('One Man Builds TikTok Username Checker ^& Generator')
+        self.title = Style.BRIGHT+Fore.RED+"""                                        
+                 _____ ___ _  _______ ___  _  __  _   _ ____  _____ ____  _   _    _    __  __ _____ 
+                |_   _|_ _| |/ /_   _/ _ \| |/ / | | | / ___|| ____|  _ \| \ | |  / \  |  \/  | ____|
+                  | |  | || ' /  | || | | | ' /  | | | \___ \|  _| | |_) |  \| | / _ \ | |\/| |  _|  
+                  | |  | || . \  | || |_| | . \  | |_| |___) | |___|  _ <| |\  |/ ___ \| |  | | |___ 
+                  |_| |___|_|\_\ |_| \___/|_|\_\  \___/|____/|_____|_| \_\_| \_/_/   \_\_|  |_|_____|
+                                  ____ _   _ _____ ____ _  _______ ____                                              
+                                 / ___| | | | ____/ ___| |/ / ____|  _ \                                             
+                                | |   | |_| |  _|| |   | ' /|  _| | |_) |                                            
+                                | |___|  _  | |__| |___| . \| |___|  _ <                                             
+                                 \____|_| |_|_____\____|_|\_\_____|_| \_\                                            
+
+
+        """
+        print(self.title)
+        self.availables = 0
+        self.takens = 0
+        self.retries = 0
+        self.ua = UserAgent()
+        self.lock = Lock()
+        self.use_proxy = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] ['+Fore.RED+'1'+Fore.CYAN+']Proxy ['+Fore.RED+'0'+Fore.CYAN+']Proxyless: '))
+
+        if self.use_proxy == 1:
+            self.proxy_type = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] ['+Fore.RED+'1'+Fore.CYAN+']Https ['+Fore.RED+'2'+Fore.CYAN+']Socks4 ['+Fore.RED+'3'+Fore.CYAN+']Socks5: '))
+        
+        self.method = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] ['+Fore.RED+'1'+Fore.CYAN+']Brute ['+Fore.RED+'0'+Fore.CYAN+']From Usernames.txt: '))
+        self.enable_webhook = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] ['+Fore.RED+'1'+Fore.CYAN+']Enable Webhook ['+Fore.RED+'0'+Fore.CYAN+']No Webhook: '))
+        self.threads_num = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] Threads: '))
+        
+        if self.enable_webhook == 1:
+            self.webhook_url = str(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] Webhook URL: '))
+
+        print('')
 
     def PrintText(self,bracket_color:Fore,text_in_bracket_color:Fore,text_in_bracket,text):
         self.lock.acquire()
@@ -56,46 +97,12 @@ class Main:
 
     def TitleUpdate(self):
         while True:
-            self.SetTitle('One Man Builds TikTok Username Checker ^& Generator ^| AVAILABLES: {0} ^| TAKENS: {1} ^| RETRIES: {2} ^| THREADS: {3}'.format(self.availables,self.takens,self.retries,active_count()-1))
+            try:
+                self.SetTitle('One Man Builds TikTok Username Checker & Generator | AVAILABLES: {0} | TAKENS: {1} | RETRIES: {2} | THREADS: {3}'.format(self.availables,self.takens,self.retries,active_count()-1))
+            except:
+                self.SetTitle('One Man Builds TikTok Username Checker ^& Generator ^| AVAILABLES: {0} ^| TAKENS: {1} ^| RETRIES: {2} ^| THREADS: {3}'.format(self.availables,self.takens,self.retries,active_count()-1))
+            
             sleep(0.1)
-
-    def __init__(self):
-        init(convert=True)
-        self.clear()
-        self.SetTitle('One Man Builds TikTok Username Checker ^& Generator')
-        self.title = Style.BRIGHT+Fore.RED+"""                                        
-                 _____ ___ _  _______ ___  _  __  _   _ ____  _____ ____  _   _    _    __  __ _____ 
-                |_   _|_ _| |/ /_   _/ _ \| |/ / | | | / ___|| ____|  _ \| \ | |  / \  |  \/  | ____|
-                  | |  | || ' /  | || | | | ' /  | | | \___ \|  _| | |_) |  \| | / _ \ | |\/| |  _|  
-                  | |  | || . \  | || |_| | . \  | |_| |___) | |___|  _ <| |\  |/ ___ \| |  | | |___ 
-                  |_| |___|_|\_\ |_| \___/|_|\_\  \___/|____/|_____|_| \_\_| \_/_/   \_\_|  |_|_____|
-                                  ____ _   _ _____ ____ _  _______ ____                                              
-                                 / ___| | | | ____/ ___| |/ / ____|  _ \                                             
-                                | |   | |_| |  _|| |   | ' /|  _| | |_) |                                            
-                                | |___|  _  | |__| |___| . \| |___|  _ <                                             
-                                 \____|_| |_|_____\____|_|\_\_____|_| \_\                                            
-
-
-        """
-        print(self.title)
-        self.availables = 0
-        self.takens = 0
-        self.retries = 0
-        self.ua = UserAgent()
-        self.lock = Lock()
-        self.use_proxy = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] ['+Fore.RED+'1'+Fore.CYAN+']Proxy ['+Fore.RED+'0'+Fore.CYAN+']Proxyless: '))
-        
-        if self.use_proxy == 1:
-            self.proxy_type = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] ['+Fore.RED+'1'+Fore.CYAN+']Https ['+Fore.RED+'2'+Fore.CYAN+']Socks4 ['+Fore.RED+'3'+Fore.CYAN+']Socks5: '))
-        
-        self.method = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] ['+Fore.RED+'1'+Fore.CYAN+']Brute ['+Fore.RED+'0'+Fore.CYAN+']From Usernames.txt: '))
-        self.enable_webhook = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] ['+Fore.RED+'1'+Fore.CYAN+']Enable Webhook ['+Fore.RED+'0'+Fore.CYAN+']No Webhook: '))
-        self.threads_num = int(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] Threads: '))
-        
-        if self.enable_webhook == 1:
-            self.webhook_url = str(input(Style.BRIGHT+Fore.CYAN+'['+Fore.RED+'>'+Fore.CYAN+'] Webhook URL: '))
-
-        print('')
 
     def Start(self):
         Thread(target=self.TitleUpdate).start()
@@ -175,17 +182,12 @@ class Main:
                 response = session.get(link,headers=headers)
 
             soup = BeautifulSoup(response.text,'html.parser')
-
-            
-
-            #available_text = 
-            #taken_text = ''
             
             if soup.find('p',{'class':'jsx-4111167561 title'}).text == "Couldn't find this account":
                 self.availables = self.availables+1
                 self.PrintText(Fore.CYAN,Fore.RED,'AVAILABLE',name)
                 with open('availables.txt','a',encoding='utf8') as f:
-                   f.write(name+'\n')
+                    f.write(name+'\n')
 
                 if self.enable_webhook == 1:
                     self.SendWebhook('[AVAILABLE] {0}'.format(name),proxy)
