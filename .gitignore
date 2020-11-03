@@ -141,5 +141,12 @@ TikTokUsernameChecker.zip
 TikTokUsernameChecker/proxies.txt
 TikTokUsernameChecker/usernames.txt
 TikTokUsernameChecker/TikTokUsernameChecker.exe
+<<<<<<< Updated upstream
 .vscode/settings.json
+=======
+<<<<<<< HEAD
+=======
+.vscode/settings.json
+>>>>>>> 2e13c051849f4278b510a96e0d3283ae785c2457
+>>>>>>> Stashed changes
 availables.txt
