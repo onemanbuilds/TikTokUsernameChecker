@@ -1,6 +1,11 @@
 # TikTok Username Checker & Generator
   Returns availability of TikTok usernames from a list.
 
+# Installation
+```
+pip3 install -r requirements.txt
+``` 
+
 # Tool
 ![](https://i.ibb.co/JQ60v5m/tiktok-username-checker-tool.png)
 
