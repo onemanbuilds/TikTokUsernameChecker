@@ -254,4 +254,4 @@ class Main:
 if __name__ == '__main__':
     disable_warnings()
     main = Main()
-    main.Start()
+    main.Start(l)
